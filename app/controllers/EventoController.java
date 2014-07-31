@@ -19,6 +19,7 @@ import play.mvc.Result;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+
 public class EventoController extends Controller {
 
 	private final static Form<Evento> EVENTO_FORM = form(Evento.class);
@@ -29,7 +30,7 @@ public class EventoController extends Controller {
 	
 		List<Evento> todosEventos = Application.getDao().findAllByClassName("Evento");
 		
-		List<Evento> eventosRequeridos = new ArrayList<>();
+		List<Evento> eventosRequeridos = new ArrayList<Evento>();
 		
 		for (Evento ev : todosEventos) {
 			if (ev.getTemas().contains(Tema.values()[(int) id])){
