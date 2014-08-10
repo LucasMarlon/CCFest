@@ -23,13 +23,18 @@ public class Application extends Controller {
 	private static GenericDAO dao = new GenericDAOImpl();
 
 	@Transactional
-    public static Result index(){
-		if (!criouEventosFake){
-			List<Evento> eventos = criarEventosFakes();
-			criarParticipacoesFake(eventos);
-
-			criouEventosFake = true;
+	public static Result index() {
+		if (session().get("user") == null) {
+			return redirect(routes.Login.show());
 		}
+		
+		if (!criouEventosFake){
+		List<Evento> eventos = criarEventosFakes();
+		criarParticipacoesFake(eventos);
+
+		criouEventosFake = true;
+	}
+	
         return ok(index.render());
     }
 
