@@ -41,7 +41,7 @@ public class Login extends Controller {
 		String senha = u.getPass();
 
         if (loginForm.hasErrors() || !validate(email, senha)) {
-        	flash("fail", "Email ou Senha Inválidos");
+        	flash("fail", "E-mail ou Senha Inválidos");
         	return badRequest(login.render(loginForm));
         } else {
         	Usuario user = (Usuario) dao.findByAttributeName(
