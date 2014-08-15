@@ -22,18 +22,20 @@ import play.data.validation.Constraints.Required;
 
 @Entity
 public class Evento {
+	
+	public static final int QUARENTA = 40, QUATROCENTOS_CINQUENTA =450;
 
 	@Id
 	@GeneratedValue
 	private long id;
 
 	@Required
-	@MaxLength(value = 40)
+	@MaxLength(value = QUARENTA)
 	private String titulo;
 
 	@Required
-	@MaxLength(value = 450)
-	@Column(name = "CONTENT", length = 450)
+	@MaxLength(value = QUATROCENTOS_CINQUENTA)
+	@Column(name = "CONTENT", length = QUATROCENTOS_CINQUENTA)
 	private String descricao;
 
 	@Temporal(value = TemporalType.DATE)
@@ -86,7 +88,7 @@ public class Evento {
 	public void setTitulo(String titulo) throws EventoInvalidoException {
 		if (titulo == null)
 			throw new EventoInvalidoException("Parametro nulo");
-		if (titulo.length() > 40)
+		if (titulo.length() > QUARENTA)
 			throw new EventoInvalidoException("Título longo");
 		this.titulo = titulo;
 	}
@@ -94,7 +96,7 @@ public class Evento {
 	public void setDescricao(String descricao) throws EventoInvalidoException {
 		if (descricao == null)
 			throw new EventoInvalidoException("Parametro nulo");
-		if (descricao.length() > 450)
+		if (descricao.length() > QUATROCENTOS_CINQUENTA)
 			throw new EventoInvalidoException("Descrição longa");
 		this.descricao = descricao;
 	}
