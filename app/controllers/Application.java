@@ -8,6 +8,7 @@ import java.util.Random;
 import models.Evento;
 import models.Participante;
 import models.Tema;
+import models.Usuario;
 import models.dao.GenericDAO;
 import models.dao.GenericDAOImpl;
 import models.exceptions.EventoInvalidoException;
@@ -21,6 +22,8 @@ public class Application extends Controller {
 	
 	private static boolean criouEventosFake = false;
 	private static GenericDAO dao = new GenericDAOImpl();
+	private static final int DATA_SETE = 7, DATA_TRES = 3, DATA_DOZE = 12, DATA_DEZESSETE =17, DATA_CINCO =5,
+			DATA_QUINZE= 15, DATA_VINTE_UM =21, DATA_OITO= 8;
 
 	@Transactional
 	public static Result index() {
@@ -34,8 +37,9 @@ public class Application extends Controller {
 
 		criouEventosFake = true;
 	}
-	
-        return ok(index.render());
+		Usuario user = (Usuario) dao.findByAttributeName(
+    			"Usuario", "email", session().get("user")).get(0);
+        return ok(index.render(user));
     }
 
 	public static GenericDAO getDao(){
@@ -54,7 +58,7 @@ public class Application extends Controller {
 			temas.add(Tema.PROGRAMACAO);
 			
 			calendar = Calendar.getInstance();
-			calendar.add(Calendar.DAY_OF_WEEK, 7);
+			calendar.add(Calendar.DAY_OF_WEEK, DATA_SETE);
 			
 			evento = new Evento("Python na mente e coração", "Neste evento iremos debater e propor soluções para novas releases.", calendar.getTime(), temas);
 			eventos.add(evento);
@@ -65,7 +69,7 @@ public class Application extends Controller {
 			temas.add(Tema.ELETRONICA);
 			
 			calendar = Calendar.getInstance();
-			calendar.add(Calendar.DAY_OF_WEEK, 3);
+			calendar.add(Calendar.DAY_OF_WEEK, DATA_TRES);
 
 			evento = new Evento("Luta de robôs", "Traga seu robô feito em arduino e traga para competir com outros.", calendar.getTime(), temas);
 			eventos.add(evento);
@@ -87,7 +91,7 @@ public class Application extends Controller {
 			temas.add(Tema.PROGRAMACAO);
 			
 			calendar = Calendar.getInstance();
-			calendar.add(Calendar.DAY_OF_WEEK, 12);
+			calendar.add(Calendar.DAY_OF_WEEK, DATA_DOZE);
 
 			evento = new Evento("II Encontro para programadores de Python", "O encontro contará com a participação de um de seus fundadores, inúmeras palestras e maratonas. Não percam!!", calendar.getTime(), temas);
 			eventos.add(evento);
@@ -99,7 +103,7 @@ public class Application extends Controller {
 			
 			calendar = Calendar.getInstance();
 			calendar.add(Calendar.MONTH, 2);
-			calendar.add(Calendar.DAY_OF_WEEK, 3);
+			calendar.add(Calendar.DAY_OF_WEEK, DATA_TRES);
 
 			evento = new Evento("III Semana da Computação Verde", "Exiba sua proposta para uma computação mais verde e concorra a diversos prêmios", calendar.getTime(), temas);
 			eventos.add(evento);
@@ -110,7 +114,7 @@ public class Application extends Controller {
 			temas.add(Tema.WEB);
 			
 			calendar = Calendar.getInstance();
-			calendar.add(Calendar.DAY_OF_WEEK, 17);
+			calendar.add(Calendar.DAY_OF_WEEK, DATA_DEZESSETE);
 
 			evento = new Evento("Web em foco", "Este evento contará com a participação de um dos fundadores da Web, e juntos iremos compartilhar diversas dicas e boas práticas nessa vasta área.", calendar.getTime(), temas);
 			eventos.add(evento);
@@ -121,7 +125,7 @@ public class Application extends Controller {
 			temas.add(Tema.ARDUINO);
 			
 			calendar = Calendar.getInstance();
-			calendar.add(Calendar.DAY_OF_WEEK, 5);
+			calendar.add(Calendar.DAY_OF_WEEK, DATA_CINCO);
 
 			evento = new Evento("Minicurso Arduino", "Evento destinado a alunos de LOAC, caso sobre vagas iremos disponibilizar em breve", calendar.getTime(), temas);
 			eventos.add(evento);
@@ -132,7 +136,7 @@ public class Application extends Controller {
 			temas.add(Tema.ARDUINO);
 			
 			calendar = Calendar.getInstance();
-			calendar.add(Calendar.DAY_OF_WEEK, 21);
+			calendar.add(Calendar.DAY_OF_WEEK, DATA_VINTE_UM);
 
 			evento = new Evento("Curto circuito", "Evento sobre circuitos eletrônicos, venha dar curto em seus circuitos também!!", calendar.getTime(), temas);
 			eventos.add(evento);
@@ -142,7 +146,7 @@ public class Application extends Controller {
 			temas.add(Tema.DESAFIOS);
 			
 			calendar = Calendar.getInstance();
-			calendar.add(Calendar.DAY_OF_WEEK, 15);
+			calendar.add(Calendar.DAY_OF_WEEK, DATA_QUINZE);
 
 			evento = new Evento("VI Encontro de Docentes de CC", "Evento para debatermos propostas e soluções para os problemas enfrentados pelos alunos de CC.", calendar.getTime(), temas);
 			eventos.add(evento);
@@ -153,7 +157,7 @@ public class Application extends Controller {
 			temas.add(Tema.DESAFIOS);
 			
 			calendar = Calendar.getInstance();
-			calendar.add(Calendar.DAY_OF_WEEK, 8);
+			calendar.add(Calendar.DAY_OF_WEEK, DATA_OITO);
 
 			evento = new Evento("Café com Java", "Curso destinado apenas a alunos cursando a disciplina LP2.", calendar.getTime(), temas);
 			eventos.add(evento);
