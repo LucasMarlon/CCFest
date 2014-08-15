@@ -17,18 +17,19 @@ public class Participante {
 
 	private final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+	private static final int SETENTA = 70; 
 
 	@Id
 	@GeneratedValue
 	private long id;
 
 	@NotNull
-	@MaxLength(value = 70)
+	@MaxLength(value = SETENTA)
 	private String nome;
 
 	@Email
 	@NotNull
-	@MaxLength(value = 70)
+	@MaxLength(value = SETENTA)
 	private String email;
 
 	@ManyToOne
@@ -49,10 +50,12 @@ public class Participante {
 	}
 
 	public void setNome(String nome) throws PessoaInvalidaException {
-		if (nome == null)
+		if (nome == null){
 			throw new PessoaInvalidaException("Parametro nulo");
-		if (nome.length() > 70)
+		}
+		if (nome.length() > SETENTA){
 			throw new PessoaInvalidaException("Nome longo");
+		}
 		this.nome = nome;
 	}
 
@@ -61,12 +64,15 @@ public class Participante {
 	}
 
 	public void setEmail(String email) throws PessoaInvalidaException {
-		if (email == null)
+		if (email == null){
 			throw new PessoaInvalidaException("Parametro nulo");
-		if (!email.matches(EMAIL_PATTERN))
+		}
+		if (!email.matches(EMAIL_PATTERN)){
 			throw new PessoaInvalidaException("Email inválido");
-		if (email.length() > 70)
+		}
+		if (email.length() > SETENTA){
 			throw new PessoaInvalidaException("Email longo");
+		}
 		this.email = email;
 	}
 
@@ -75,8 +81,9 @@ public class Participante {
 	}
 
 	public void setEvento(Evento evento) throws PessoaInvalidaException {
-		if (evento == null)
+		if (evento == null){
 			throw new PessoaInvalidaException("Parametro nulo");
+		}
 		this.evento = evento;
 	}
 }
