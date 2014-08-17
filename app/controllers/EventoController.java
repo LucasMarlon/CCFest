@@ -24,7 +24,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class EventoController extends Controller {
 
 	private final static Form<Evento> EVENTO_FORM = form(Evento.class);
-	private final static Form<Participante> participanteForm = form(Participante.class);
+	private final static Form<Participante> PARTICIPANTE_FORM = form(Participante.class);
 
 	@Transactional
 	public static Result eventosPorTema(int id) throws PessoaInvalidaException, EventoInvalidoException{
@@ -46,7 +46,7 @@ public class EventoController extends Controller {
 		
 		try {
 			json = mapper.writeValueAsString(eventosRequeridos);
-		} catch (Exception _) {
+		} catch (Exception e) {
 			return badRequest();
 		}
 		
@@ -70,7 +70,7 @@ public class EventoController extends Controller {
 	
 	@Transactional
 	public static Result participar(long id) throws PessoaInvalidaException, EventoInvalidoException{
-		Form<Participante> participanteFormRequest = participanteForm.bindFromRequest();
+		Form<Participante> participanteFormRequest = PARTICIPANTE_FORM.bindFromRequest();
 		
 		if (participanteFormRequest.hasErrors()) {
             String errorMsg = "";
@@ -84,7 +84,7 @@ public class EventoController extends Controller {
             return badRequest(errorMsg);
         }
 		
-		if (participanteForm.hasErrors()) {
+		if (PARTICIPANTE_FORM.hasErrors()) {
 			return badRequest();
 		} else {
 			Evento evento = Application.getDao().findByEntityId(Evento.class, id);

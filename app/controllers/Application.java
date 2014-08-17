@@ -199,7 +199,7 @@ public class Application extends Controller {
 			criarEvento(evento);
 
 			return eventos;
-		} catch (EventoInvalidoException _) {
+		} catch (EventoInvalidoException e) {
 			return null;
 		}
 	}
@@ -251,7 +251,7 @@ public class Application extends Controller {
 					eventos.get(rnd.nextInt(TRES))));
 			criarParticipacao(new Participante("Tairine Reis",
 					"tairine_reis@mail.com", eventos.get(rnd.nextInt(TRES))));
-		} catch (PessoaInvalidaException _) {
+		} catch (PessoaInvalidaException e) {
 		}
 	}
 
