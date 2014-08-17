@@ -49,6 +49,10 @@ public class Usuario {
 		this.nome = nome;
 	}
 	
+	public Long getId(){
+		return id;
+	}
+	
 	@Override
 	public boolean equals(Object obj){
 		if(obj == null || !(obj instanceof Usuario)){

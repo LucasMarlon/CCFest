@@ -86,4 +86,8 @@ public class Participante {
 		}
 		this.evento = evento;
 	}
+	
+	public Long getId(){
+		return id;
+	}
 }
